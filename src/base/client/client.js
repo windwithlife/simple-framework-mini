@@ -1,10 +1,10 @@
 
 import ClientStorage from '../store/storage';
 import ClientInfo from "./client-info";
-import * as dayjs from 'dayjs';
+
 import Taro from '@tarojs/taro';
 
-const __foot_print__  = '__footprint__';
+
 class Client {
     constructor(props) {
         ClientInfo.init();

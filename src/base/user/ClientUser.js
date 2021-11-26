@@ -3,7 +3,9 @@ import ClientStorage from '../store/storage';
 import Taro from '@tarojs/taro'
 import * as dayjs from 'dayjs';
 
+
 const USER_INFO = '__USER_INFO__'
+const __foot_print__  = '__footprint__';
 
 class ClientUser {
     constructor(props) {
