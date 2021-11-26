@@ -1,32 +1,26 @@
 // @ts-ignore
 /* eslint-disable */
-import Taro,{request} from '@tarojs/taro'
+import Taro, { request } from '@tarojs/taro'
 
 import { HTTP_STATUS } from '../constants/status'
 import { logError } from '../utils/error'
 import Client from '../client/client';
 import Storage from './storage';
 
-// let GATEWAY = 'https://api.zhangyongqiao.com';
-// console.log('Gateway===>' + GATEWAY);
-
-
 export default class Model {
   bizPath;
-  constructor(props){
-    if (props && props.bizPath){
+  constructor(props) {
+    if (props && props.bizPath) {
       this.bizPath = props.bizPath;
     }
-    if (props && props.gateway){
+    if (props && props.gateway) {
       this.gateway = props.gateway;
     }
   }
-  processUnauthentication =(response)=>{
-    Taro.navigateTo({ url: '/pages/user/login/index'});
+  processUnauthentication = (response) => {
+    Taro.navigateTo({ url: '/pages/user/login/index' });
   }
   saveToken(token) {
-    //localStorage.setItem('web_token', token);
-    //Taro.setStorageSync('token', token);
     Storage.saveToken(token);
   }
   checkResponse(res) {
@@ -56,15 +50,15 @@ export default class Model {
     return token;
   }
   composeFullUrl(url) {
-    let fullPath ="";
-    if (this.gateway){
+    let fullPath = "";
+    if (this.gateway) {
       fullPath = this.gateway;
     }
-    
-    if (this.bizPath){
+
+    if (this.bizPath) {
       fullPath = fullPath + this.bizPath + url;
-    }else{
-      fullPath = fullPath  + url;
+    } else {
+      fullPath = fullPath + url;
     }
     console.log('current url is ---->' + fullPath);
     return fullPath;
@@ -73,7 +67,7 @@ export default class Model {
 
   fetch_get(url, query,) {
     let that = this;
-    let params = {cid: Client.getClientId(), ...query};
+    let params = { cid: Client.getClientId(), ...query };
     return new Promise((resolve, reject) => {
       request({
         url: this.composeFullUrl(url),
@@ -103,33 +97,33 @@ export default class Model {
   }
   async fetch_post(url, body, options) {
     let that = this;
-    let params = { params: body ,head:{cid: Client.getClientId()}};
+    let params = { params: body, head: { cid: Client.getClientId() } };
     return new Promise((resolve, reject) => {
-      request({
-        url: this.composeFullUrl(url),
-        header: {
-          'Content-Type': 'application/json',
-          token: this.getToken(),
-        },
-        data: params,
-        method: 'post',
-        success(response) {
-          //console.log(response);
-          resolve(response.data);
-          // if (that.checkResponse(response)) {
-          //   resolve(response.data);
-          // } else {
-          //   reject(response.data);
-          // }
-        },
-        fail(error) {
-          console.log("request exception......",error);
-          reject(error);
-          Taro.showToast({ title: '接口异常', icon: 'error', duration: 2000 })
-        }
-      });//end request
-    }
-    );
+     
+        request({
+          url: this.composeFullUrl(url),
+          header: {
+            'Content-Type': 'application/json',
+            token: this.getToken(),
+          },
+          data: params,
+          method: 'post',
+          success(response) {
+            resolve(response.data);
+            // if (that.checkResponse(response)) {
+            //   resolve(response.data);
+            // } else {
+            //   reject(response.data);
+            // }
+          },
+          fail(error) {
+            console.log("network request exception......");
+            reject(error);
+            //Taro.showToast({ title: '接口异常', icon: 'error', duration: 2000 })
+          }
+        });//end request
+     
+    });
 
   }
 

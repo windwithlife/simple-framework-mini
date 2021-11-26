@@ -8,7 +8,6 @@ import "taro-ui/dist/style/components/search-bar.scss";
 
 import {BlockSelect} from "../../../../src";
 import {BasePage} from "../../../../src/base";
-//import {BasePage} from "simple-framework-mini/base";
 import ServerModel from '../../models/ServerModel';
 
 export default class Index extends BasePage {
@@ -18,13 +17,13 @@ export default class Index extends BasePage {
   
   constructor(props){
     super(props);
+    this.pageId ='select-page';
     this.pageName ="首页"
   }
   
   componentDidMount() {
     let that = this;
-    super.componentDidMount();
-             
+    super.componentDidMount();        
   }
 
   componentWillUnmount() { }
@@ -42,7 +41,6 @@ export default class Index extends BasePage {
   }
   createPage=()=>{
     ServerModel.createPage({blocks:this.state.selectedList}).then((result)=>{console.log(result)});
-
   }
   
   onSelect =(result)=>{

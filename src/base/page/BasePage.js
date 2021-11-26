@@ -3,21 +3,38 @@ import PageRouter from "../route/router";
 import { Component } from "react";
 import UbtClient from "../ubt/ubt-client";
 import {logDebug} from "../utils/error";
-import Client from "../client/client";
 import ClientUser from "../user/ClientUser";
 
-let ubt_instance = new UbtClient();
+// let ubt_instance = new UbtClient();
 export default class BasePage extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        if (props.gateway){
+            this.gateway = props.gateway;
+        }else{
+            this.gateway ='';
+        }
+        if (props.bizPath){
+            this.bizPath = props.bizPath;
+        }else{
+            this.bizPath ='';
+        }
+        this.ubt_instance = new UbtClient({gateway:this.gateway,bizPath: this.bizPath});
     }
     componentDidMount() {
-        this.sendPV();
-        //this.saveFootPrint();
-        
+        this.sendPV();        
     }
     componentDidShow() { 
         this.saveFootPrint();
+    }
+    helper=()=>{
+        return  PageHelper;
+    }
+    ubt=()=>{
+        return this.ubt_instance;
+    }
+    clientUser=()=>{
+        return ClientUser;
     }
     gotoPage = (params) => {
         PageRouter.gotoPage(params);
@@ -33,22 +50,14 @@ export default class BasePage extends Component{
     }
     sendPV=()=>{
         if(this.pageId){
-            ubt_instance.ubtSendPV({pageId:this.pageId});
+            this.ubt_instance.ubtSendPV({pageId:this.pageId});
         }
-        
     }
     saveFootPrint=()=>{
         
         if(this.pageName){
-            //console.log('save foot proint...')
             ClientUser.saveFootPrint(this.pageName);
         }  
-    }
-    ubtTrace=(key,value)=>{
-        ubt_instance.ubtTrace(key,value);
-    }
-    ubtMetric=()=>{
-        ubt_instance.ubtMetric(key,value);
     }
     debugInfo = (name,info)=>{
         logDebug(name, info);
