@@ -1,79 +1,30 @@
-import { Component } from 'react'
-import { View, Text,Image,Swiper, SwiperItem } from '@tarojs/components'
-import Taro, { stopDeviceMotionListening } from '@tarojs/taro'
-import { AtButton ,AtIcon,AtSearchBar} from 'taro-ui'
 
+import { View, Button } from '@tarojs/components'
 import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.less'
 import "taro-ui/dist/style/components/icon.scss";
 import "taro-ui/dist/style/components/search-bar.scss";
 
-// import PageConfig from "../components/config";
-import BrandModel from '../../models/BrandModel';
-import AdvertModel from '../../models/AdvertModel';
-import NewsModel from '../../models/NewsModel';
 
-import SwiperNormal from '../components/swiper/swiper-normal';
-import HandleNormal from '../components/entrypoint/handle-normal';
-import RecommendNormal from '../components/recommend/recommend-normal';
-
-
-//import BasePage from "../../common/page/BasePage";
-// import {BasePage} from "../../../../base";
-import {BasePage} from "simple-framework-mini/base";
-
+import {BlockSelect} from "../../../../src";
+import {BasePage} from "../../../../src/base";
+//import {BasePage} from "simple-framework-mini/base";
+import ServerModel from '../../models/ServerModel';
 
 export default class Index extends BasePage {
   state={
-    sectionList:[],
-    showPage: false,
-    swipperList:[],
-    handleList:[],
-    newsList:[],
-    
+    selectedList:[] 
   }
   
   constructor(props){
-    // console.log('firsttaro',Taro)
-    // console.log('firsttaro2',Taro.getNetworkType)
     super(props);
-    //this.pageConfig = new PageConfig();
-    this.pageId = "PID-TestPage";
     this.pageName ="首页"
-   
   }
   
   componentDidMount() {
     let that = this;
     super.componentDidMount();
-    AdvertModel.queryByPosition({id:476}).then((advertData)=>{
-      advertData.map((item)=>{
-        item.titleColor = 'blue';
-        item.playCount = 1000;
-        item.pic = item.image;
-    })
-      that.setState({swipperList:advertData});
-    }
-
-    );
-    BrandModel.queryAll().then((data)=>{
-      data.map((item)=>{
-          item.title = item.content = item.name;
-          item.icon = "device";
-      })
-      //console.log('handle data...',data);
-      that.setState({handleList:data});
-    });
-
-    NewsModel.queryAll().then((data)=>{
-      data.map((item)=>{
-          item.copywriter = "新";
-          item.picUrl = item.image;
-      })
-      //console.log('news data...',data);
-      that.setState({newsList:data});
-    });
-           
+             
   }
 
   componentWillUnmount() { }
@@ -84,16 +35,28 @@ export default class Index extends BasePage {
 
   componentDidHide() { }
 
+  gotoPreview=()=>{
+      const jsonParams = JSON.stringify(this.state.selectedList);    
+      const url = 'pages/preview/index?json=' + jsonParams;
+      this.goto({url:url});
+  }
+  createPage=()=>{
+    ServerModel.createPage({blocks:this.state.selectedList}).then((result)=>{console.log(result)});
 
+  }
+  
+  onSelect =(result)=>{
+      console.log('selected data..',result)
+      this.setState({selectedList:result});
+  }
   render() {
     let that = this;
-    //console.log('render..............')
+ 
     return (
-      <View >       
-      <SwiperNormal  data = {that.state.swipperList} />
-       <HandleNormal data = {that.state.handleList} />
-       <RecommendNormal data = {that.state.newsList} />
-       <div style={{color:'#bbb'}}>test</div>
+      <View >        
+       <BlockSelect key={'select-button'} onResult={that.onSelect}/>
+       <Button key={'preview-button'} type='warn' onClick={that.gotoPreview}>预览</Button>
+       <Button key={'create-button'} type='warn' onClick={that.createPage}>创建页面</Button>
       </View>
      
     )

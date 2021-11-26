@@ -1,14 +1,15 @@
 import { Component } from 'react'
 import { View, Text,Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { AtButton ,AtIcon} from 'taro-ui'
-import Client from '../../common/client/client';
+
 
 import "taro-ui/dist/style/components/button.scss" // 按需引入
 
 import "taro-ui/dist/style/components/icon.scss";
-import BasePage from '../../common/page/BasePage';
-import ClientUser from '../../common/user/ClientUser';
+//import BasePage from '../../common/page/BasePage';
+// import ClientUser from '../../common/user/ClientUser';
+import {BasePage,ClientUser} from "../../../../src/base";
+
 import './index.less'
 
 const USER_INFO = "__userinfo__";
@@ -52,10 +53,7 @@ export default class Index extends BasePage {
 
   componentDidShow() { 
     console.log('Did Show in ....');
-     if(Client.isLogin()){
-       return;
-     }
-     
+  
   }
 
   componentDidHide() { }

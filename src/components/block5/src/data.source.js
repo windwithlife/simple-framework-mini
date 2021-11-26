@@ -42,36 +42,6 @@ export const Content50DataSource = {
         img: 'https://zos.alipayobjects.com/rmsportal/faKjZtrmIbwJvVR.svg',
         content: 'Ant Motion',
       },
-      {
-        name: 'item3',
-        img: 'https://t.alipayobjects.com/images/rmsweb/T11aVgXc4eXXXXXXXX.svg',
-        content: 'Ant Design',
-      },
-      {
-        name: 'item4',
-        img: 'https://zos.alipayobjects.com/rmsportal/faKjZtrmIbwJvVR.svg',
-        content: 'Ant Motion',
-      },
-      {
-        name: 'item5',
-        img: 'https://t.alipayobjects.com/images/rmsweb/T11aVgXc4eXXXXXXXX.svg',
-        content: 'Ant Design',
-      },
-      {
-        name: 'item6',
-        img: 'https://zos.alipayobjects.com/rmsportal/faKjZtrmIbwJvVR.svg',
-        content: 'Ant Motion',
-      },
-      {
-        name: 'item7',
-        img: 'https://t.alipayobjects.com/images/rmsweb/T11aVgXc4eXXXXXXXX.svg',
-        content: 'Ant Design',
-      },
-      {
-        name: 'item8',
-        img: 'https://zos.alipayobjects.com/rmsportal/faKjZtrmIbwJvVR.svg',
-        content: 'Ant Motion',
-      }
     ],
   },
   wrapper: { className: 'home-page-wrapper content5-wrapper' },

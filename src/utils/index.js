@@ -21,3 +21,4 @@
 
   export {logError} from './error'
   export {logDebug} from './error'
+  export {convertRichTextImage} from './richtext'

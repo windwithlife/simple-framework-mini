@@ -1,18 +1,18 @@
 @import './common.less';
 
-@content5: content5;
+@contentList: block-select;
 
-.@{content5}-wrapper {
-  background-color: #fafafa;
+.@{contentList}-wrapper {
+  background-color: #eee;
   min-height: 720px;
 
-  .@{content5} {
+  .@{contentList} {
 
 
     .block {
       margin-bottom: 24px;
 
-      .content5-block-content {
+      .block-content {
         display: block;
         background: #fff;
         border-radius: 4px;
@@ -23,24 +23,16 @@
         .page-pro();
         border: none;
         color: @text-color;
-        //transition: box-shadow .3s @ease-out, transform .3s @ease-out;
-
-        &-img {
+     
+        .block-text {
           width: 100%;
-          height: 160px;
-          display: block;
-          background: @line-color;
-          padding: 5%;
+          background: #fafafa;
         }
-
-        &-text {
+        .checked {
           width: 100%;
-          line-height: 30px;
+          background: rgb(48, 36, 206);
         }
-
-        &:hover {
-          bottom: 0;
-        }
+        
       }
     }
 

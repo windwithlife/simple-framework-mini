@@ -7,8 +7,8 @@ import { logError } from '../utils/error'
 import Client from '../client/client';
 import Storage from './storage';
 
-let GATEWAY = 'https://api.zhangyongqiao.com';
-console.log('Gateway===>' + GATEWAY);
+// let GATEWAY = 'https://api.zhangyongqiao.com';
+// console.log('Gateway===>' + GATEWAY);
 
 
 export default class Model {
@@ -16,6 +16,9 @@ export default class Model {
   constructor(props){
     if (props && props.bizPath){
       this.bizPath = props.bizPath;
+    }
+    if (props && props.gateway){
+      this.gateway = props.gateway;
     }
   }
   processUnauthentication =(response)=>{
@@ -53,13 +56,17 @@ export default class Model {
     return token;
   }
   composeFullUrl(url) {
-    let fullPath = GATEWAY;
+    let fullPath ="";
+    if (this.gateway){
+      fullPath = this.gateway;
+    }
+    
     if (this.bizPath){
       fullPath = fullPath + this.bizPath + url;
     }else{
       fullPath = fullPath  + url;
     }
-    //console.log('current url is ---->' + fullPath);
+    console.log('current url is ---->' + fullPath);
     return fullPath;
   }
 

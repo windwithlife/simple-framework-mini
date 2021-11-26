@@ -1,7 +1,8 @@
 
 import ClientStorage from '../store/storage';
 import Taro from '@tarojs/taro'
-// import ClientInfo from "./client-info";
+import * as dayjs from 'dayjs';
+
 const USER_INFO = '__USER_INFO__'
 
 class ClientUser {
@@ -47,6 +48,39 @@ class ClientUser {
                 },
             })
         });
+    }
+    saveFootPrint(pageName){
+        let footprinter = {name:pageName,time:dayjs().format()};
+        let historyList = [] 
+        let oldList = ClientStorage.getItem(__foot_print__);
+        if (!oldList){
+            historyList.push(footprinter);
+        }else{
+            historyList = JSON.parse(oldList);
+            if (historyList.lenght >= 30 ){
+                historyList.shift();
+            }
+            historyList.push(footprinter);
+        }
+      
+        const historyString = JSON.stringify(historyList)
+        ClientStorage.setItem(__foot_print__,historyString);
+       
+    }
+    getFootPrint(){
+        
+        let historyList = [] 
+        let oldList = ClientStorage.getItem(__foot_print__);
+        console.log('old history....',oldList);
+        if (oldList){
+            historyList = JSON.parse(oldList);
+        }
+        console.log('get visit history', historyList);
+        return historyList;
+    }
+    cleanFootPrint(){
+        ClientStorage.removeItem(__foot_print__);
+        return true;
     }
 }
 export default new ClientUser();
