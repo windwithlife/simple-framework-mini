@@ -9,12 +9,12 @@ import ClientUser from "../user/ClientUser";
 export default class BasePage extends Component{
     constructor(props){
         super(props);
-        if (props.gateway){
+        if (props && props.gateway){
             this.gateway = props.gateway;
         }else{
             this.gateway ='';
         }
-        if (props.bizPath){
+        if (props && props.bizPath){
             this.bizPath = props.bizPath;
         }else{
             this.bizPath ='';
