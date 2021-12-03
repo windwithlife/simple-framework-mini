@@ -6,7 +6,7 @@ import "taro-ui/dist/style/components/icon.scss";
 import "taro-ui/dist/style/components/search-bar.scss";
 
 
-import {BlockSelect} from "../../../../src";
+import BlockSelect from "../components/blockSelect";
 import {BasePage} from "../../../../src/base";
 import ServerModel from '../../models/ServerModel';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View, Image } from '@tarojs/components'
-import DataSource from './BlockList';
+import {BlockList as DataSource} from '../../../../../../src';
 import '../style/index.js'
 
 class BlockSelect extends React.Component {

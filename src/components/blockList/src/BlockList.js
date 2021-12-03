@@ -24,12 +24,4 @@ const DataSource = {
     ],
    
 };
-export const getComponentByName = function(name){
-    for (var item of DataSource){
-       if (item.name === name){
-         return item;
-       }
-    }
-}
-
 export default DataSource;

@@ -60,9 +60,9 @@ export default class Index extends BasePage {
     return (
       <View >       
      {
-        that.state.blocks.map((item)=>{
+        that.state.blocks.map((item,index)=>{
              let Component = item.component;
-             return <Component />
+             return <Component key={item.name} />
         })
      }
        
