@@ -9,8 +9,6 @@ import "taro-ui/dist/style/components/search-bar.scss";
 
 import {BlockList} from "../../../../src";
 import {BasePage} from "../../../../src/base";
-// import {BasePage} from "simple-framework-mini/base";
-
 
 export default class Index extends BasePage {
 
@@ -19,8 +17,8 @@ export default class Index extends BasePage {
   
     super(props);
 
-    this.pageId = "PID-TestPage";
-    this.pageName ="首页"
+    this.pageId = "PID-PreviewPage";
+    this.pageName ="预览页"
     this.state={
       blocks:[],
     }

@@ -40,7 +40,13 @@ export default class Index extends BasePage {
       this.goto({url:url});
   }
   createPage=()=>{
-    ServerModel.createPage({blocks:this.state.selectedList}).then((result)=>{console.log(result)});
+    let resultList = [];
+    this.state.selectedList.map((item)=>{
+        if (item.checked){
+          resultList.push(item);
+        }
+    });
+    ServerModel.createPage({blocks:resultList}).then((result)=>{console.log(result)});
   }
   
   onSelect =(result)=>{
