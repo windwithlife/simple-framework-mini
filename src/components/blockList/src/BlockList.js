@@ -1,5 +1,6 @@
 import Block5 from '../../block5';
 import FunctionList from '../../functionList/src';
+import Swiper from '../../swiper';
 
 const DataSource = {
   
@@ -19,6 +20,12 @@ const DataSource = {
         checked: false,
         sourcecodePath: 'functionList',
         component: FunctionList,
+      },
+      {
+        name: 'Swiper',
+        checked: false,
+        sourcecodePath: 'swiper',
+        component: Swiper,
       },
       
     ],
