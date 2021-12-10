@@ -2,6 +2,9 @@ import Block5 from '../../block5';
 import FunctionList from '../../functionList/src';
 import Swiper from '../../swiper';
 
+import imagetextPage from '../../imagetextPage';
+
+
 const DataSource = {
   
     title: {
@@ -11,21 +14,27 @@ const DataSource = {
     itemsData: [
       {
         name: 'Block5',
-        checked: false,
         sourcecodePath: 'block5',
         component: Block5,
+        type:'block'
       },
       {
         name: 'FunctionList',
-        checked: false,
         sourcecodePath: 'functionList',
         component: FunctionList,
+        type:'block'
       },
       {
         name: 'Swiper',
-        checked: false,
         sourcecodePath: 'swiper',
         component: Swiper,
+        type:'block'
+      },
+      {
+        name: 'ImageTextPage',
+        sourcecodePath: 'imagetextPage',
+        component: imagetextPage,
+        type:'page'
       },
       
     ],

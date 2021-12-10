@@ -1,2 +1,2 @@
 
-export {default} from './src/Content5';
+export {default} from './src/swiper-normal';
